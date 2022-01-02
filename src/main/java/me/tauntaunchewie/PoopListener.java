@@ -11,6 +11,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 public class PoopListener implements Listener {
@@ -21,6 +22,9 @@ public class PoopListener implements Listener {
         if (!player.isSneaking() && PoopUtils.poopOn()) {
             // Create Poop
             ItemStack is = new ItemStack(Material.BROWN_DYE);
+            ItemMeta newMetaName = is.getItemMeta();
+            newMetaName.setDisplayName(PoopUtils.getPoopName());
+            is.setItemMeta(newMetaName);
 
             // Place item behind player
             Location spawnSpot = player.getLocation().add(player.getLocation().getDirection().multiply(-2.5));
