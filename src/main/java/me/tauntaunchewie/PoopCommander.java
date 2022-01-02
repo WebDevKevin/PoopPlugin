@@ -41,9 +41,27 @@ public class PoopCommander implements CommandExecutor {
                         player.sendMessage("Example: /poop on");
                     }
                 }
+                else if (args.length >= 2) {
+                    // Rename Poop entities
+                    if (args[0].equalsIgnoreCase("rename")) {
+                        String finalName = "";
+                        for (int i=1; i<args.length; i++) {
+                            finalName = finalName + args[i] + " ";
+                        }
+
+                        // Strip last character
+                        PoopUtils.setPoopName(finalName.replaceAll(".$", ""));
+                    }
+                    else {
+                        player.sendMessage("Usage: /poop rename NEWNAME");
+                        player.sendMessage("Example: /poop rename BearNugs");
+                    }
+                }
                 else {
                     player.sendMessage("Usage: /poop (on or off or status)");
                     player.sendMessage("Example: /poop on");
+                    player.sendMessage("Usage: /poop rename NEWNAME");
+                    player.sendMessage("Example: /poop rename BearNugs");
                 }
             }
             else {
