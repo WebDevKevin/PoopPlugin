@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 public class PoopUtils {
     private static PoopPlugin plugin;
     private static boolean shiftPoopOn = false;
+    private static String poopName = "poop";
 
     /**
      * Sets whether the plugin is on or off
@@ -19,6 +20,25 @@ public class PoopUtils {
 
         plugin.getConfig().set("enabled", onOff);
         plugin.saveConfig();
+    }
+
+    /**
+     * Set the poop name and save to config
+     * @param newName
+     */
+    public static void setPoopName(String newName) {
+        poopName = newName;
+
+        plugin.getConfig().set("poopName", newName);
+        plugin.saveConfig();
+    }
+
+    /**
+     * Retrieve the configured name of the poop
+     * @return
+     */
+    public static String getPoopName() {
+        return poopName;
     }
 
     /**
@@ -62,11 +82,12 @@ public class PoopUtils {
     }
 
     /**
-     * Grab defaults from config and load locally
+     * Grab defaults from config and set locally
      * @param instance
      */
     public static void loadDefaults(PoopPlugin instance) {
         plugin = instance;
-        setPoopOn(plugin.getConfig().getBoolean("enabled"));
+        shiftPoopOn = plugin.getConfig().getBoolean("enabled");
+        poopName = plugin.getConfig().getString("poopName");
     }
 }
